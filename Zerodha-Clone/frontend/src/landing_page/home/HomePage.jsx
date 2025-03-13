@@ -8,14 +8,15 @@ import Navbar from '../Navbar';
 import OpenAccount from '../OpenAccount';
 import Footer from '../Footer';
 
+
 function HomePage () {
     return ( 
-        <div>
+        <div className="container-fluid">
             <Hero />
-            <Stats />
-            <Pricing />
-            <Education />
-            <Awards />
+            <div className="py-5"><Stats /></div>
+            <div className="py-5 bg-light"><Pricing /></div>
+            <div className="py-5"><Education /></div>
+            <div className="py-5 bg-light"><Awards /></div>
         </div>
      );
 }
