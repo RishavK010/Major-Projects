@@ -16,6 +16,16 @@ const app = express();
 app.use(cors());
 app.use(bodyParser.json());
 
+const connectDB = async () => {
+    try {
+        await mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true });
+        console.log("DB connected");
+    } catch (error) {
+        console.error("DB connection failed:", error.message);
+        process.exit(1);  // Exit process with failure
+    }
+};
+
 // app.get("/addHoldings", async (req, res) => {
 //   let tempHoldings = [
 //     {
@@ -185,6 +195,10 @@ app.use(bodyParser.json());
 //   res.send("Done!");
 // });
 
+app.get("/", (req, res) => {
+    res.send("Backend is running!");
+});
+
 app.get("/allHoldings", async (req, res) => {
     let allHoldings = await HoldingsModel.find({});
     res.json(allHoldings);
@@ -195,21 +209,26 @@ app.get("/allPositions", async (req, res) => {
    res.json(allPositions);
 });
   
+
 app.post("/newOrder", async (req, res) => {
-    let newOrder = new OrdersModel({
-        name: req.body.name,
-        qty: req.body.qty,
-        price: req.body.price,
-        mode: req.body.mode,
-    });
-  
-    newOrder.save();
-  
-    res.send("Order saved!");
+    try {
+        let newOrder = new OrdersModel({
+            name: req.body.name,
+            qty: req.body.qty,
+            price: req.body.price,
+            mode: req.body.mode,
+        });
+
+        await newOrder.save();
+        res.send("Order saved!");
+    } catch (error) {
+        res.status(500).json({ error: "Failed to save order" });
+    }
 });
 
-app.listen(PORT,()=>{
-    console.log("app started");
-    mongoose.connect(uri);  
-    console.log("DB connected");
+// Start server only after DB connection
+connectDB().then(() => {
+    app.listen(PORT, () => {
+        console.log(`Server running on port ${PORT}`);
+    });
 });
