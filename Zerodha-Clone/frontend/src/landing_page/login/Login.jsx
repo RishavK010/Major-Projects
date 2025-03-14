@@ -7,7 +7,7 @@ function Login() {
   useEffect(() => {
     setTimeout(() => {
       window.location.href = "https://zerodhadashboard.vercel.app/";
-    }, 2000); // Delay for spinner visibility
+    }, 2000); 
   }, []);
 
   return (
