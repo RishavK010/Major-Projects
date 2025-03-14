@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 export default function Navbar() {
   return (
@@ -7,13 +8,13 @@ export default function Navbar() {
       style={{ backgroundColor: "#FFF" }}
     >
       <div className="container p-2">
-        <a className="navbar-brand" href="/">
+        <Link className="navbar-brand" to="/">
           <img
             src="imgs/logo.svg"
             style={{ width: "25%" }}
             alt="Logo"
           />
-        </a>
+        </Link>
         <button
           className="navbar-toggler"
           type="button"
@@ -23,38 +24,36 @@ export default function Navbar() {
           aria-expanded="false"
           aria-label="Toggle navigation"
         >
-        <span className="navbar-toggler-icon"></span>
+          <span className="navbar-toggler-icon"></span>
         </button>
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
-          <form className="d-flex" role="search">
-            <ul className="navbar-nav mb-lg-0">
-              <li className="nav-item">
-                <a className="nav-link active" aria-current="page" href="/login">
-                  Login
-                </a>
-              </li>
-              <li className="nav-item">
-                <a className="nav-link active" href="/about">
-                  About
-                </a>
-              </li>
-              <li className="nav-item">
-                <a className="nav-link active" href="/product">
-                  Product
-                </a>
-              </li>
-              <li className="nav-item">
-                <a className="nav-link active" href="/pricing">
-                  Pricing
-                </a>
-              </li>
-              <li className="nav-item">
-                <a className="nav-link active" href="/support">
-                  Support
-                </a>
-              </li>
-            </ul>
-          </form>
+          <ul className="navbar-nav mb-lg-0">
+            <li className="nav-item">
+              <Link className="nav-link active" to="/login">
+                Login
+              </Link>
+            </li>
+            <li className="nav-item">
+              <Link className="nav-link active" to="/about">
+                About
+              </Link>
+            </li>
+            <li className="nav-item">
+              <Link className="nav-link active" to="/product">
+                Product
+              </Link>
+            </li>
+            <li className="nav-item">
+              <Link className="nav-link active" to="/pricing">
+                Pricing
+              </Link>
+            </li>
+            <li className="nav-item">
+              <Link className="nav-link active" to="/support">
+                Support
+              </Link>
+            </li>
+          </ul>
         </div>
       </div>
     </nav>
